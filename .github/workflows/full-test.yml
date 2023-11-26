@@ -67,10 +67,27 @@ jobs:
         if-no-files-found: error
         path: ./coverage
 
-    # - name: send telegram message on push
-    #   uses: appleboy/telegram-action@master
+    - name: send telegram message on push
+      uses: appleboy/telegram-action@master
+      with: 
+        to: -4002180791
+        token: 6181166815:AAGr9mtykHY7RpSXOaOBohHfMeUGQ03NS44
+        photo: ./test.png
+        message: 
+          ${{ github.actor }} created commit: 
+          Commit message: ${{ github.event.commits[0].message }}
+          Repository: ${{ gitgub.repository }}
+          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+  #
+  # - name: Upload artifact
+    #   uses: actions/upload-pages/artifact@v1
     #   with: 
-    #     to: -090900
-    #     token: 
-    #     photo: ./test.png
-    #     message: 
+    #     path: './jest-html-report'
+
+    # - name: Deploy to GitHub Pages
+    #   id: deployment
+    #   uses: actions/deploy-pages@v1
+      
+    # - name: Deploy
+    # uses: JaveIves/github-pages-deploy-action@v4
