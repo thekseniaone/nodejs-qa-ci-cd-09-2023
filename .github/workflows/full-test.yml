@@ -73,13 +73,12 @@ jobs:
         to: -4002180791
         token: 6181166815:AAGr9mtykHY7RpSXOaOBohHfMeUGQ03NS44
         photo: ./test.png
-        message: 
+        message: | 
           ${{ github.actor }} created commit: 
           Commit message: ${{ github.event.commits[0].message }}
           Repository: ${{ gitgub.repository }}
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
-  #
   # - name: Upload artifact
     #   uses: actions/upload-pages/artifact@v1
     #   with: 
