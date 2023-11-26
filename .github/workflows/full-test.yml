@@ -1,0 +1,66 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI Full Tests
+
+on:
+  workflow_dispatch: #возможность запускать pipeline руками 
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+#permissions: #sets permissions of the github_token to allow deployment to gitgub pages
+#  contents: read
+#  pages: write
+#  id-token: wirte
+
+# allow one concurrent deployment
+# concurrency:
+#  group: "pages"
+#  cancel-in-progress: true
+
+
+jobs:
+  build:
+    timeout-minutes: 10
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install deps
+      run: npm ci
+
+    - name: Build package
+      run: npm run build --if-present
+
+    - name: Run tests
+      run: npm run test
+
+    - name: Upload report
+      uses: actions/upload-artifact@v3
+      with: 
+        name: report
+        if-no-files-found: error
+        path: ./jest-html-report
+
+    # - name: Run tests coverage
+    #   run: npm run test:coverage
+    #   continue-on-error: true
+
+    # - name: Upload coverage
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: coverage
