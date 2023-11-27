@@ -11,10 +11,10 @@ on:
     branches: [ "main" ]
 
 ##sets permissions of the github_token to allow deployment to gitgub pages
-#permissions: 
-#  contents: read
-#  pages: write
-#  id-token: wirte
+permissions: 
+ contents: read
+ pages: write
+ id-token: write
 
 #allow one concurrent deployment
 concurrency:
