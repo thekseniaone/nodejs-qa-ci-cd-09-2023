@@ -10,12 +10,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
-#permissions: #sets permissions of the github_token to allow deployment to gitgub pages
+##sets permissions of the github_token to allow deployment to gitgub pages
+#permissions: 
 #  contents: read
 #  pages: write
 #  id-token: wirte
 
-allow one concurrent deployment
+#allow one concurrent deployment
 concurrency:
  group: "pages"
  cancel-in-progress: true
