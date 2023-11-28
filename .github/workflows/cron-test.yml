@@ -5,11 +5,10 @@ name: Main pipeline
 
 on:
   workflow_dispatch:
-
-push:
-  branches: [ "main"]
-pull_request:
-  branches: [ "main" ]
+  push:
+    branches: [ "main"]
+  pull_request:
+    branches: [ "main" ]
 
 schedule: 
   #Каждый день в 6 и 18 часов запускать pipeline
@@ -17,6 +16,8 @@ schedule:
 
 jobs:
   build:
+
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
 
