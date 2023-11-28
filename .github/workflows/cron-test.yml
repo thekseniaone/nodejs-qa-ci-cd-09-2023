@@ -12,7 +12,7 @@ on:
 
   schedule: 
     #Каждый день в 6 и 18 часов запускать pipeline
-    - cron: '* 6,13 * * 1-5'
+    - cron: '20 6,10 * * 1-5'
 
 jobs:
   build:
